@@ -1,6 +1,7 @@
 package bucket.sort;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,11 +58,38 @@ public class MaxDifferenceValueInSortedArray {
     {
         List<List<Integer>> buckets = this.constructBuckets();
         int max = this.divider;
-        for (int i = 1; i < buckets.size(); i++)
+        int pre = 0;
+        int next= pre +1;
+        while(next < buckets.size())
         {
+            if (buckets.get(pre).size() > 0 && buckets.get(next).size() > 0)
+            {
+                // pre bucket has elements, next bucket has elements
+                int difference = Collections.min(buckets.get(next)) -
+                        Collections.max(buckets.get(pre));
+                if (difference > max)
+                {
+                    max = difference;
+                }
+                pre = next;
+                next = pre + 1;
+            }else if (buckets.get(pre).size() == 0)
+            {
+                pre = next;
+                next = pre + 1;
+            }else if (buckets.get(next).size() == 0)
+            {
+                next = next + 1;
+            }
         }
         return max;
     }
 
+    public static void main(String args[])
+    {
+        int [] input = new int[]{22, 45, 12, 8, 10, 6, 72, 81, 33, 18, 50, 14};
+        MaxDifferenceValueInSortedArray main =new MaxDifferenceValueInSortedArray(input, 10);
+        System.out.println(main.getMaDifferenceValueInSortedArray());
+    }
 
 }
