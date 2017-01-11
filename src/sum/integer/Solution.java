@@ -97,7 +97,7 @@ public class Solution {
 //        for (String bit : bits) {
 //            System.out.print(bit);
 //        }
-        System.out.println(main.getSum(49989, 21119));
+        System.out.println(main.getSum(49989, 1));
 
     }
 
