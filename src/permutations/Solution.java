@@ -48,7 +48,7 @@ public class Solution {
     public static void main(String args[])
     {
         Solution main = new Solution();
-        int[] nums = new int[]{1,2,3,4};
+        int[] nums = new int[]{1,2,3};
         List<List<Integer>> results = main.permute(nums);
         for(List<Integer> result : results)
         {
