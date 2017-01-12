@@ -72,6 +72,10 @@ public class Solution {
     {
         Solution main = new Solution();
         int [][]matrix = new int[][]{{2,5},{8,4},{0,-1}};
-        main.spiralOrder(matrix);
+        List<Integer> items = main.spiralOrder(matrix);
+        for(Integer item : items)
+        {
+            System.out.print(item + ",");
+        }
     }
 }
