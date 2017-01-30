@@ -1,4 +1,4 @@
-package jump.game;
+package jump.game.second;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,25 +8,20 @@ import java.util.List;
  */
 public class Solution {
 
-    private int minimumSteps;
+    private boolean canJump =false;
 
-    public int jump(int[] nums) {
-        if (nums.length == 0)
-        {
-            return 0;
-        }
-        if (nums.length == 1)
-        {
-            return 0;
-        }
-        this.minimumSteps = nums.length - 1;
+    public boolean canJump(int[] nums) {
         List<Integer> steps = new ArrayList<>();
         tryJump(steps, nums, 0);
-        return this.minimumSteps;
+        return this.canJump;
     }
 
     private void tryJump(List<Integer> steps, int[] input, int thStep)
     {
+        if (this.canJump)
+        {
+            return;
+        }
         if (thStep >= input.length)
         {
             return;
@@ -42,17 +37,14 @@ public class Solution {
         }
         if(currentSteps == input.length -1)
         {
-            if (steps.size() < this.minimumSteps)
-            {
-                this.minimumSteps = steps.size();
-            }
+            this.canJump = true;
+            return;
         }
-        // continue for next step
         // continue for next step
         int i = Math.min(input.length-1-currentSteps, input[currentSteps]);
         for(; i >= 1; i--)
         {
-            if (i + currentSteps >= input.length)
+            if (this.canJump)
             {
                 return;
             }
@@ -61,12 +53,12 @@ public class Solution {
             steps.remove(steps.size() -1);
         }
     }
-
     public static void main(String args[])
     {
-        int[] nums = new int[]{5,6,5,3,9,8,3,1,2,8,2,4,8,3,9,
-            1,0,9,4,6,5,9,8,7,4,2,1,0,2};
         Solution main = new Solution();
-        System.out.println(main.jump(nums));
+        int[] nums = new int[] {2,0,6,9,8,4,5,0,8,9,1,2,9,6,8,8,0,6,3,1,2,2,1,2,6,5,3,1,2,2,6,4,2,4,3,0,0,0,3,8,2,4,0,1,2,0,1,4,6,5,8,0,7,9,3,4,6,6,5,8,9,3,4,3,7,0,4,9,0,9,8,4,3,0,7,7,1,9,1,9,4,9,0,1,9,
+            5,7,7,1,5,8,2,8,2,6,8,2,2,7,5,1,7,9,6};
+        System.out.println(main.canJump(nums));
     }
+
 }
