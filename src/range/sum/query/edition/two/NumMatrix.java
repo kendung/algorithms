@@ -21,12 +21,19 @@ public class NumMatrix {
         {
             for (int j = 0; j < matrix[0].length; j++)
             {
-                for(int k = 0; i <= i; k++)
+                if (i == 0 && j == 0)
                 {
-                    for(int x = 0; x <= j; x ++)
-                    {
-                        this.sums[i][j] = this.sums[i][j] + this.inputs[k][x];
-                    }
+                    this.sums[i][j] = matrix[i][j];
+                }else if (i == 0)
+                {
+                    this.sums[i][j] = this.sums[i][j-1] + matrix[i][j];
+                }else if ( j == 0)
+                {
+                    this.sums[i][j] = this.sums[i-1][j] + matrix[i][j];
+                }else
+                {
+                    this.sums[i][j] = this.sums[i-1][j] + this.sums[i][j-1] -
+                            this.sums[i-1][j-1] + matrix[i][j];
                 }
             }
         }
