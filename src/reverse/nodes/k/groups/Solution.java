@@ -126,7 +126,10 @@ public class Solution {
         ListNode head = main.reverseKGroup(node1, 5);
         while(head != null)
         {
+            if (head.next != null)
             System.out.print(head.val + "->");
+            else
+            System.out.print(head.val);
             head = head.next;
         }
     }
