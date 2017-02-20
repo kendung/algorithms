@@ -8,7 +8,7 @@ public class Solution {
     private long[] results = new long[1690];
 
 
-    public long nthUglyNumber(int n) {
+    public int nthUglyNumber(int n) {
         // initialize
         for(int i = 0; i < results.length; i ++)
         {
@@ -16,7 +16,7 @@ public class Solution {
         }
         // if n = 1; then return 1;
         results[0] = 1;
-        return dp(n);
+        return (int)dp(n);
     }
 
     private long dp(int n)
@@ -69,6 +69,6 @@ public class Solution {
     public static void main(String[] args)
     {
         Solution main = new Solution();
-        System.out.print(main.nthUglyNumber(1600));
+        System.out.print(main.nthUglyNumber(1690));
     }
 }
