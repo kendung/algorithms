@@ -9,6 +9,8 @@ import java.util.List;
  */
 public class Solution {
 
+    private List<String> intermediateResult = new ArrayList<>();
+
     public boolean wordBreak(String s, List<String> wordDict) {
         if (wordDict.contains(s))
         {
@@ -21,6 +23,10 @@ public class Solution {
 
     private boolean backtracking(String s, List<String> wordDict)
     {
+        if (intermediateResult.contains(s))
+        {
+            return true;
+        }
         if (s.equals("") || wordDict.contains(s))
         {
             return true;
@@ -38,8 +44,19 @@ public class Solution {
                    int occurIndex = s.indexOf(wordCandidate, i);
                    if(occurIndex != -1)
                    {
-                       if (backtracking(s.substring(0,occurIndex), wordDict) &&
-                               backtracking(s.substring(occurIndex + wordCandidate.length()), wordDict))
+                       String leftSubstring = s.substring(0,occurIndex);
+                       boolean left = backtracking(leftSubstring, wordDict);
+                       if (left && !intermediateResult.contains(leftSubstring))
+                       {
+                           intermediateResult.add(leftSubstring);
+                       }
+                       String rightSubstring = s.substring(occurIndex + wordCandidate.length());
+                       boolean right = backtracking(rightSubstring, wordDict);
+                       if (right && !intermediateResult.contains(rightSubstring))
+                       {
+                           intermediateResult.add(rightSubstring);
+                       }
+                       if (left && right)
                        {
                            return true;
                        }
@@ -63,6 +80,6 @@ public class Solution {
         words.add("ca");
         words.add("c");
         words.add("b");
-        System.out.print(main.wordBreak("acccbccb", words));
+        System.out.print(main.wordBreak("cccccccccbbbbbbb", words));
     }
 }
